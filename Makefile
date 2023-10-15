@@ -6,19 +6,19 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 00:18:43 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/15 19:16:55 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/15 19:24:49 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-SRC =	src/lib/ft_atol.c\
+SRC =	src/utils/ft_atol.c\
 		src/main.c\
 		
 PROJECT = <$(GREEN)$(NAME)$(RESET)>
 			
 INCLUDES = include
 
-CFLAGS = -g -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=address #-I $(INCLUDE_LIB) 
+CFLAGS = -g -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=address 
 RM= @rm -rf
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
@@ -28,7 +28,6 @@ OBJ = $(patsubst %.c,%.o,$(SRC))
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
-
 
 $(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
@@ -43,7 +42,6 @@ clean :
 fclean : clean
 	$(RM) $(NAME)
 	@printf "$(PROJECT) $(YELLOW) deleting $(NAME) $(RESET)!\n"
-	
 	
 re : fclean all
 

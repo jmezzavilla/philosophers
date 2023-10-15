@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "philosophers.h": "c",
+        "stdlib.h": "c",
+        "philo.h": "c"
+    }
+}

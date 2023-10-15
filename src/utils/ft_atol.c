@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 22:34:14 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/15 19:12:57 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:54:06 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,3 @@ long	ft_atol(const char *nptr)
 		i++;
 	return (ft_result_atol(nptr, sign, i));
 }
-
-/*int main(void)
-{
-	char *sa = " -11234ab567";
-
-	printf("custom = %d\n", ft_atoi(sa));
-}*/

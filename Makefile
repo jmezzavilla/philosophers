@@ -6,12 +6,14 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 00:18:43 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/15 19:24:49 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/15 19:53:16 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 SRC =	src/utils/ft_atol.c\
+		src/utils/ft_isnumber.c\
+		src/utils/ft_isdigit.c\
 		src/main.c\
 		
 PROJECT = <$(GREEN)$(NAME)$(RESET)>
@@ -42,7 +44,10 @@ clean :
 fclean : clean
 	$(RM) $(NAME)
 	@printf "$(PROJECT) $(YELLOW) deleting $(NAME) $(RESET)!\n"
-	
+
+norm:
+	norminette
+		
 re : fclean all
 
 .PHONY : all clean fclean bonus re

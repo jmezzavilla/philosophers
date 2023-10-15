@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/15 21:02:43 by jealves-         ###   ########.fr       */
+/*   Created: 2023/03/07 13:48:38 by jealves-          #+#    #+#             */
+/*   Updated: 2023/10/15 19:52:44 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-#include <stdio.h>
-#include <limits.h>
-#include <pthread.h>
-
-typedef struct s_philosophers
+int	ft_isdigit(int c)
 {
-    pthread_t thread;
-}   t_philosophers;
-
-typedef struct s_program
-{
-    t_philosophers *philosophers;
-} t_program;
-
-long	ft_atol(const char *nptr);
-int	ft_isdigit(int c);
-int	ft_isnumber(char *str);
-
-#endif
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}

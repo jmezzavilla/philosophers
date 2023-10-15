@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/15 21:02:43 by jealves-         ###   ########.fr       */
+/*   Created: 2023/09/25 22:43:16 by jealves-          #+#    #+#             */
+/*   Updated: 2023/10/15 19:53:58 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-#include <stdio.h>
-#include <limits.h>
-#include <pthread.h>
-
-typedef struct s_philosophers
+int	ft_isnumber(char *str)
 {
-    pthread_t thread;
-}   t_philosophers;
+	int	i;
 
-typedef struct s_program
-{
-    t_philosophers *philosophers;
-} t_program;
-
-long	ft_atol(const char *nptr);
-int	ft_isdigit(int c);
-int	ft_isnumber(char *str);
-
-#endif
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		if (ft_atol(str[i]) > INT_MAX)
+			return (0);
+		if (ft_atol(str[i]) < INT_MIN)
+			return (0);
+		i++;
+	}
+	return (1);
+}

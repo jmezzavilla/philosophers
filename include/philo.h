@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/15 21:02:43 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:31:11 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 #include <stdio.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <pthread.h>
 
 typedef struct s_philosophers
 {
     pthread_t thread;
+    pthread_mutex_t *right_fork;
+    pthread_mutex_t *left_fork;
 }   t_philosophers;
 
 typedef struct s_program

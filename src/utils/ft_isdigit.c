@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:48:38 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/15 19:52:44 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:31:50 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
-		return (1);
+		return (true);
 	else
-		return (0);
+		return (false);
 }

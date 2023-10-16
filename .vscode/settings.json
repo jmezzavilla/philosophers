@@ -3,6 +3,9 @@
         "philosophers.h": "c",
         "stdlib.h": "c",
         "philo.h": "c",
-        "pthread.h": "c"
+        "pthread.h": "c",
+        "stdbool.h": "c",
+        "stdio.h": "c",
+        "limits.h": "c"
     }
 }

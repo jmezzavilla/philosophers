@@ -6,6 +6,7 @@
         "pthread.h": "c",
         "stdbool.h": "c",
         "stdio.h": "c",
-        "limits.h": "c"
+        "limits.h": "c",
+        "types.h": "c"
     }
 }

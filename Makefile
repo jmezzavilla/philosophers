@@ -6,7 +6,7 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 00:18:43 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/19 22:12:47 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/19 22:13:38 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRC =	src/utils/ft_atol.c\
 		src/utils/ft_isnumber.c\
 		src/utils/ft_isdigit.c\
 		src/utils/msg.c\
+		src/utils/validate.c\
 		src/main.c\
 		
 PROJECT = <$(GREEN)$(NAME)$(RESET)>

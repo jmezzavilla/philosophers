@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/17 20:01:30 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:14:16 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ typedef struct s_philosophers
 
 typedef struct s_program
 {
-    t_philosophers *philosophers;
-    uint64_t eat;
-    uint64_t die;
-    uint64_t sleep;
+    int eat_time;
+	int max_eat_philo;
+    int die_time;
+    int sleep_time;
+	int nbr_philos;
     uint64_t start;
     pthread_mutex_t *fork;
 } t_program;

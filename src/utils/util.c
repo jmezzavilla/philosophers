@@ -1,16 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 22:34:14 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/15 19:54:06 by jealves-         ###   ########.fr       */
+/*   Created: 2023/10/19 22:14:55 by jealves-          #+#    #+#             */
+/*   Updated: 2023/10/19 22:33:08 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool ft_argv_isnumber(const char **argv)
+{
+	int i;
+	i = 0;
+
+	while(argv[i])
+	{
+		if(!ft_isnumber(argv[i]))
+			return(false);
+	}
+	return(true);
+}
+
+bool	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (true);
+	else
+		return (false);
+}
+
+bool	ft_isnumber(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (str[i] == '\0')
+		return (false);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		if (ft_atol(str[i]) > INT_MAX)
+			return (false);
+		if (ft_atol(str[i]) < INT_MIN)
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 long	ft_result_atol(const char *nptr, int sign, int i)
 {
@@ -51,3 +94,4 @@ long	ft_atol(const char *nptr)
 		i++;
 	return (ft_result_atol(nptr, sign, i));
 }
+

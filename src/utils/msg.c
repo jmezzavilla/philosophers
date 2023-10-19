@@ -1,3 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   msg.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 22:16:30 by jealves-          #+#    #+#             */
+/*   Updated: 2023/10/19 22:20:14 by jealves-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void msg_wrong_nbr_args();
+void msg(char *str)
+{
+	printf("%s\n", str);
+}
+
+void msg_wrong_nbr_args()
+{
+	msg("Number of arguments invalid");
+}

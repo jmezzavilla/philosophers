@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/17 20:14:16 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:11:50 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_philosophers
     size_t eat_count;
     bool is_sleeping;
     bool is_eating;
-    uint64_t die;
     pthread_mutex_t *right_fork;
     pthread_mutex_t *left_fork;
     t_program *program;
@@ -45,5 +44,7 @@ typedef struct s_program
 long	ft_atol(const char *nptr);
 int	ft_isdigit(int c);
 int	ft_isnumber(char *str);
+
+void msg_wrong_nbr_args();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/19 22:34:14 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:45:17 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 typedef struct s_philosophers
 {
@@ -46,6 +47,7 @@ bool				ft_isdigit(int c);
 bool				ft_isnumber(char *str);
 bool				ft_argv_isnumber(const char **argv);
 
-void				msg_wrong_nbr_args(void);
+void				msg(char *str);
+void				msg_error(char *str);
 
 #endif

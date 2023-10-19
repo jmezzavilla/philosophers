@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:16:30 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/19 22:20:14 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:46:01 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void msg(char *str)
 	printf("%s\n", str);
 }
 
-void msg_wrong_nbr_args()
+void msg_error(char *str)
 {
-	msg("Number of arguments invalid");
+	msg(str);
+	exit(EXIT);
 }

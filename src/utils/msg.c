@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:16:30 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/19 22:46:01 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:46:40 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void msg(char *str)
 void msg_error(char *str)
 {
 	msg(str);
-	exit(EXIT);
+	exit(EXIT_FAILURE);
 }

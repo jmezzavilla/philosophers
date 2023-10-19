@@ -6,7 +6,11 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 00:18:43 by jealves-          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/10/19 22:35:28 by jealves-         ###   ########.fr        #
+=======
+#    Updated: 2023/10/19 22:14:12 by jealves-         ###   ########.fr        #
+>>>>>>> e4afcb0 (validate.c)
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +18,7 @@ NAME = philo
 SRC =	src/utils/util.c\
 		src/utils/msg.c\
 		src/utils/validate.c\
-		src/main.c\
+		src/philo.c\
 		
 PROJECT = <$(GREEN)$(NAME)$(RESET)>
 			

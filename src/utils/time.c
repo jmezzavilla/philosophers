@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate.c                                         :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 22:15:05 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/21 19:45:29 by jealves-         ###   ########.fr       */
+/*   Created: 2023/10/21 19:31:31 by jealves-          #+#    #+#             */
+/*   Updated: 2023/10/21 20:51:05 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void ft_validate_args(int argc, char **argv)
+size_t	get_timestamp(void)
 {
-    if(argc < 5 || argc > 6)
-        msg_error("Wrong number of arguments!");
-    if(!ft_argv_isnumber(argv))
-		msg_error("Arguments must be numbers");
+	struct timeval	curr_time;
+
+	if (gettimeofday(&curr_time, NULL))
+		return (0);
+	return ((curr_time.tv_sec * 1000) + (curr_time.tv_usec / 1000));
 }

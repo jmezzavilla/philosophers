@@ -6,7 +6,7 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/19 23:00:57 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/21 19:32:36 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRC =	src/utils/util.c\
  		src/utils/init.c\
 		src/utils/msg.c\
 		src/utils/validate.c\
+		src/utils/time.c\
 		src/philo.c\
 		
 PROJECT = <$(GREEN)$(NAME)$(RESET)>

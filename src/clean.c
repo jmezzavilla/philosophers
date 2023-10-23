@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msg.c                                              :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 22:16:30 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/19 22:46:40 by jealves-         ###   ########.fr       */
+/*   Created: 2023/10/21 21:47:02 by jealves-          #+#    #+#             */
+/*   Updated: 2023/10/21 22:07:13 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void msg(char *str)
+void	clean(t_data *data, t_philo *philo)
 {
-	printf("%s\n", str);
-}
+	int	i;
 
-void msg_error(char *str)
-{
-	msg(str);
-	exit(EXIT_FAILURE);
+	i = 0;
+	while (i < data->nbr_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&philo[i].lock);
+		i++;
+	}
+	pthread_mutex_destroy(&data->write);
+	pthread_mutex_destroy(&data->death);
+	free(data->forks);
+	free(philo);
 }

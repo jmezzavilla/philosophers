@@ -6,24 +6,24 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:14:55 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/21 19:49:10 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/21 21:21:33 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool ft_argv_isnumber(char **argv)
+bool	ft_argv_isnumber(char **argv)
 {
-	int i;
-	i = 1;
+	int	i;
 
-	while(argv[i])
+	i = 1;
+	while (argv[i])
 	{
-		if(!ft_isnumber(argv[i]))
-			return(false);
+		if (!ft_isnumber(argv[i]))
+			return (false);
 		i++;
 	}
-	return(true);
+	return (true);
 }
 
 bool	ft_isdigit(int c)
@@ -47,11 +47,10 @@ bool	ft_isnumber(char *str)
 	{
 		if (!ft_isdigit(str[i]))
 			return (false);
-		
 		i++;
 	}
 	if (ft_atol(str) > INT_MAX)
-			return (false);
+		return (false);
 	if (ft_atol(str) < INT_MIN)
 		return (false);
 	return (true);
@@ -96,4 +95,3 @@ long	ft_atol(char *nptr)
 		i++;
 	return (ft_result_atol(nptr, sign, i));
 }
-

@@ -6,23 +6,25 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/21 19:32:36 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/21 21:56:18 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-SRC =	src/utils/util.c\
- 		src/utils/init.c\
-		src/utils/msg.c\
-		src/utils/validate.c\
-		src/utils/time.c\
+SRC =	src/util.c\
+ 		src/init.c\
+		src/msg.c\
+		src/threads.c\
+		src/time.c\
+		src/routine.c\
 		src/philo.c\
+		src/clean.c\
 		
 PROJECT = <$(GREEN)$(NAME)$(RESET)>
 			
 INCLUDES = include
 
-CFLAGS = -g -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=address 
+CFLAGS = -g -pthread -Wall -I $(INCLUDES) -Wextra #-Werror #-fsanitize=address 
 RM= @rm -rf
 
 OBJ = $(patsubst %.c,%.o,$(SRC))

@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/23 13:40:37 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:34:56 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init_philos(t_data *data, t_philo *philo)
 		philo[i].last_meal = get_timestamp();
 		philo[i].is_eating = false;
 		philo[i].is_sleeping = false;
+		philo[i].is_dead = false;
 		philo[i].data = data;
 		pthread_mutex_init(&philo[i].lock, NULL);
 		philo[i].left_fork = &data->forks[i];

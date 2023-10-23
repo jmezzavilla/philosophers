@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/21 22:13:47 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:21:28 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	size_t			eat_count;
 	bool			is_sleeping;
 	bool			is_eating;
+	bool			is_dead;
 	time_t			last_meal;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*right_fork;
@@ -60,5 +61,6 @@ size_t				get_timestamp(void);
 void				*routine(void *arg);
 void				create_threads(t_data *data, t_philo *philo);
 void				clean(t_data *data, t_philo *philo);
+void	messages(char *str, t_philo *philo);
 
 #endif

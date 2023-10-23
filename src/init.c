@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/21 22:12:40 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:40:37 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_philos(t_data *data, t_philo *philo)
 	init_forks(data);
 	while (i < data->nbr_philos)
 	{
-		philo[i].id = i;
+		philo[i].id = i + 1;
 		philo[i].eat_count = 0;
 		philo[i].last_meal = get_timestamp();
 		philo[i].is_eating = false;

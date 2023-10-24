@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/23 16:21:28 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:54:23 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
+#include <unistd.h>
 
 typedef struct s_data
 {
@@ -27,6 +28,7 @@ typedef struct s_data
 	int				die_time;
 	int				sleep_time;
 	int				nbr_philos;
+	bool			is_dead;
 	time_t			start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write;
@@ -37,14 +39,14 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	size_t			id;
-	size_t			eat_count;
+	int			eat_count;
 	bool			is_sleeping;
 	bool			is_eating;
-	bool			is_dead;
+	bool			is_thinking;
 	time_t			last_meal;
 	pthread_mutex_t	lock;
-	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	t_data			*data;
 }					t_philo;
 
@@ -61,6 +63,13 @@ size_t				get_timestamp(void);
 void				*routine(void *arg);
 void				create_threads(t_data *data, t_philo *philo);
 void				clean(t_data *data, t_philo *philo);
-void	messages(char *str, t_philo *philo);
+void				messages(char *str, t_philo *philo);
+void	messages_death(char *str, t_philo *philo);
+time_t				time_diff(t_philo *philo);
+
+void	waiting_time(size_t time);
+bool 	check_death(t_philo *philo);
+void drop_forks(t_philo *philo);
+void take_forks(t_philo *philo);
 
 #endif

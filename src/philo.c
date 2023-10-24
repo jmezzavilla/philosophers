@@ -6,12 +6,11 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:40:54 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/21 22:13:13 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/24 11:44:30 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 void	validate_args(int argc, char **argv)
 {
@@ -25,7 +24,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_philo	*philos;
-	
+
 	validate_args(argc, argv);
 	init(argc, argv, &data);
 	philos = malloc(sizeof(t_philo) * data.nbr_philos);

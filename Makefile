@@ -6,7 +6,7 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/24 21:47:59 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/26 23:36:21 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ SRC =	src/util.c\
 		src/threads.c\
 		src/time.c\
 		src/routine.c\
-		src/resource.c\
 		src/philo.c\
 		src/clean.c\
 		
@@ -25,7 +24,7 @@ PROJECT = <$(GREEN)$(NAME)$(RESET)>
 			
 INCLUDES = include
 
-CFLAGS = -g -pthread -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=address 
+CFLAGS = -g -pthread -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=thread
 RM= @rm -rf
 
 OBJ = $(patsubst %.c,%.o,$(SRC))

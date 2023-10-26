@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/philo", // Substitua pelo nome do seu executável
-            "args": ["1", "800", "200", "200"],
+            "args": ["4", "400", "200", "200"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

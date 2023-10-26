@@ -6,24 +6,24 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:14:55 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/24 11:45:28 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:35:35 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	ft_argv_isnumber(char **argv)
+bool	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
+	size_t	count;
 
-	i = 1;
-	while (argv[i])
+	count = 0;
+	while (s1[count] == s2[count] && s1[count] != '\0')
 	{
-		if (!ft_isnumber(argv[i]))
-			return (false);
-		i++;
+		count++;
 	}
-	return (true);
+	if (((unsigned char)s1[count] - (unsigned char)s2[count]) == 0)
+		return (true);
+	return (false);
 }
 
 bool	ft_isdigit(int c)
@@ -51,7 +51,7 @@ bool	ft_isnumber(char *str)
 	}
 	if (ft_atol(str) > INT_MAX)
 		return (false);
-	if (ft_atol(str) < INT_MIN)
+	if (ft_atol(str) < 0)
 		return (false);
 	return (true);
 }

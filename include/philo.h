@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/24 21:54:23 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:34:37 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,20 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
-#include <unistd.h>
+# include <unistd.h>
+
+# define THINK "is Thinking"
+# define SLEEP "is Sleeping"
+# define EAT "is Eating"
+# define DIED "Died"
+# define DROP_FORK "has drop fork"
+# define TAKEN_FORK "has taken fork"
+
+typedef struct s_fork
+{
+	bool			using;
+	pthread_mutex_t	rs;
+}					t_fork;
 
 typedef struct s_data
 {
@@ -30,46 +43,51 @@ typedef struct s_data
 	int				nbr_philos;
 	bool			is_dead;
 	time_t			start;
-	pthread_mutex_t	*forks;
+	t_fork			**forks;
 	pthread_mutex_t	write;
 	pthread_mutex_t	death;
 }					t_data;
 
+typedef struct s_state
+{
+	char			*task;
+	int				time;
+	struct s_state	*next;
+}					t_state;
+
 typedef struct s_philo
 {
+	t_state			*state;
 	pthread_t		thread;
 	size_t			id;
-	int			eat_count;
-	bool			is_sleeping;
-	bool			is_eating;
-	bool			is_thinking;
+	int				eat_count;
 	time_t			last_meal;
-	pthread_mutex_t	lock;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	int				left_fork;
+	int				right_fork;
 	t_data			*data;
 }					t_philo;
 
+t_data				*data(void);
 long				ft_atol(char *nptr);
 bool				ft_isdigit(int c);
 bool				ft_isnumber(char *str);
-bool				ft_argv_isnumber(char **argv);
+bool				ft_strcmp(const char *s1, const char *s2);
 
-void				msg(char *str);
 void				msg_error(char *str);
-void				init(int argc, char **argv, t_data *data);
-void				init_philos(t_data *data, t_philo *philo);
-size_t				get_timestamp(void);
-void				*routine(void *arg);
-void				create_threads(t_data *data, t_philo *philo);
-void				clean(t_data *data, t_philo *philo);
-void				messages(char *str, t_philo *philo);
-void	messages_death(char *str, t_philo *philo);
-time_t				time_diff(t_philo *philo);
+void				write_msg(t_philo *philo, char *msg);
 
-void	waiting_time(size_t time);
-bool 	check_death(t_philo *philo);
-void drop_forks(t_philo *philo);
-void take_forks(t_philo *philo);
+void				init(int argc, char **argv);
+void				init_philos(t_philo *philo);
+
+void				*routine(void *arg);
+void				create_threads(t_philo *philo);
+
+size_t				get_timestamp(void);
+time_t				time_diff(void);
+void				waiting_time(t_philo *philo);
+bool				check_death(t_philo *philo);
+
+void				clean(t_philo *philo);
+void				clean_states_philo(t_philo *philo);
 
 #endif

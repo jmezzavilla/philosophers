@@ -6,41 +6,46 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:16:30 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/24 21:27:22 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:35:12 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	msg(char *str)
-{
-	printf("%s\n", str);
-}
-
 void	msg_error(char *str)
 {
-	msg(str);
+	printf("%s\n", str);
 	exit(EXIT_FAILURE);
 }
 
-void	messages(char *str, t_philo *philo)
+bool	check_death(t_philo *philo)
 {
-	time_t	time;
-	if (!check_death(philo) && !philo->data->is_dead)
+	pthread_mutex_lock(&data()->death);
+	if (data()->is_dead)
 	{
-		pthread_mutex_lock(&philo->data->write);
-		time = time_diff(philo);
-		printf("%lu %ld %s\n", time, philo->id, str);
-		pthread_mutex_unlock(&philo->data->write);
+		pthread_mutex_unlock(&data()->death);
+		return (true);
 	}
+	if ((get_timestamp()
+			- philo->last_meal) > (long unsigned int)data()->die_time)
+	{
+		if (data()->is_dead)
+			return (data()->is_dead);
+		data()->is_dead = true;
+		philo->state->task = DIED;
+		write_msg(philo, DIED);
+		pthread_mutex_unlock(&data()->death);
+		return (true);
+	}
+	pthread_mutex_unlock(&data()->death);
+	return (false);
 }
 
-void	messages_death(char *str, t_philo *philo)
+void	write_msg(t_philo *philo, char *msg)
 {
-	time_t	time;
-
-	pthread_mutex_lock(&philo->data->death);
-	time = time_diff(philo);
-	printf("%lu %ld %s\n", time, philo->id, str);
-	pthread_mutex_unlock(&philo->data->death);
+	pthread_mutex_lock(&data()->write);
+	printf("%lu %ld %s\n", time_diff(), philo->id, msg);
+	pthread_mutex_unlock(&data()->write);
+	if (ft_strcmp(philo->state->task, msg))
+		waiting_time(philo);
 }

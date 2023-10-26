@@ -6,36 +6,74 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/24 21:54:51 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:35:21 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_eat(t_philo *philo)
+void	drop_fork(t_fork *fork, t_philo *philo)
 {
-	take_forks(philo);
-	philo->last_meal = get_timestamp();
-	messages("is eating", philo);
-	philo->is_thinking = false;
-	philo->is_eating = true;
-	philo->eat_count++;
-	waiting_time(philo->data->eat_time);
-	drop_forks(philo);
+	while (!check_death(philo))
+	{
+		pthread_mutex_lock(&fork->rs);
+		if (fork->using)
+		{
+			fork->using = false;
+			pthread_mutex_unlock(&fork->rs);
+			write_msg(philo, DROP_FORK);
+			break ;
+		}
+		pthread_mutex_unlock(&fork->rs);
+	}
 }
 
-void	philo_sleep(t_philo *philo)
+void	take_fork(t_fork *fork, t_philo *philo)
 {
-	messages("is sleeping", philo);
-	philo->is_eating = false;
-	philo->is_sleeping = true;
-	waiting_time(philo->data->sleep_time);
+	while (!check_death(philo))
+	{
+		pthread_mutex_lock(&fork->rs);
+		if (!fork->using)
+		{
+			fork->using = true;
+			pthread_mutex_unlock(&fork->rs);
+			write_msg(philo, TAKEN_FORK);
+			break ;
+		}
+		pthread_mutex_unlock(&fork->rs);
+	}
 }
-void	philo_think(t_philo *philo)
+
+void	philo_eat(t_philo *philo)
 {
-	philo->is_sleeping = false;
-	philo->is_thinking = true;
-	messages("is thinking", philo);
+	if (philo->id % 2)
+	{
+		take_fork(data()->forks[philo->left_fork], philo);
+		take_fork(data()->forks[philo->right_fork], philo);
+	}
+	else
+	{
+		take_fork(data()->forks[philo->right_fork], philo);
+		take_fork(data()->forks[philo->left_fork], philo);
+	}
+	if (check_death(philo))
+		return ;
+	philo->last_meal = get_timestamp();
+	philo->eat_count++;
+	write_msg(philo, philo->state->task);
+	drop_fork(data()->forks[philo->right_fork], philo);
+	drop_fork(data()->forks[philo->left_fork], philo);
+}
+
+void	philo_life(t_philo *philo)
+{
+	if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
+		philo_eat(philo);
+	else if (ft_strcmp(philo->state->task, SLEEP) && !check_death(philo))
+		write_msg(philo, philo->state->task);
+	else if (ft_strcmp(philo->state->task, THINK) && !check_death(philo))
+		write_msg(philo, philo->state->task);
+	philo->state = philo->state->next;
 }
 
 void	*routine(void *arg)
@@ -43,20 +81,17 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2 == 0)
+	while (philo->eat_count < data()->max_eat_philo && !check_death(philo))
 	{
-		messages("is thinking", philo);
-		waiting_time(philo->data->eat_time);
+		pthread_mutex_lock(&data()->death);
+		if (data()->is_dead)
+		{
+			pthread_mutex_unlock(&data()->death);
+			break ;
+		}
+		pthread_mutex_unlock(&data()->death);
+		philo_life(philo);
 	}
-	
-	while (!philo->data->is_dead && philo->eat_count < philo->data->max_eat_philo)
-	{
-		if(philo->is_thinking)
-			philo_eat(philo);
-		else if(philo->is_eating)
-			philo_sleep(philo);
-		else if(philo->is_sleeping)
-			philo_think(philo);
-	}	
+	clean_states_philo(philo);
 	return (NULL);
 }

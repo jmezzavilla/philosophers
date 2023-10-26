@@ -6,28 +6,48 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:40:54 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/24 11:44:30 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:35:18 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+t_data	*data(void)
+{
+	static t_data	data;
+
+	return (&data);
+}
+
+bool	ft_argv_isnumber(char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (argv[i])
+	{
+		if (!ft_isnumber(argv[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 void	validate_args(int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 		msg_error("Error: Wrong number of arguments!");
 	if (!ft_argv_isnumber(argv))
-		msg_error("Error: Arguments must be numbers");
+		msg_error("Error: not valid number");
 }
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
 	t_philo	*philos;
 
 	validate_args(argc, argv);
-	init(argc, argv, &data);
-	philos = malloc(sizeof(t_philo) * data.nbr_philos);
-	init_philos(&data, philos);
-	create_threads(&data, philos);
+	init(argc, argv);
+	philos = malloc(sizeof(t_philo) * data()->nbr_philos);
+	init_philos(philos);
+	create_threads(philos);
 }

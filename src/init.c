@@ -6,73 +6,80 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/24 21:37:22 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:35:08 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-
-void	init_forks(t_data *data, t_philo *philo)
+t_state	*init_state(void)
 {
-	int	i;
-	
-	i = 0;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->nbr_philos);
-	if (!data->forks)
-		msg_error("Error: malloc // alterar");
-	while (i < data->nbr_philos)
-	{
-		pthread_mutex_init(&data->forks[i], NULL);
-		i++;
-	}
-	i = 0;
-	
-	while(i < data->nbr_philos)
-	{		
-		philo[i].left_fork = &data->forks[i];
-		if (i == 0)
-			philo[i].right_fork= &data->forks[data->nbr_philos - 1];
-		else
-			philo[i].right_fork= &data->forks[i - 1];	
-		
-		i++;
-	}
-	
+	t_state	*think;
+	t_state	*sleep;
+	t_state	*eat;
+
+	think = malloc(sizeof(t_state));
+	sleep = malloc(sizeof(t_state));
+	eat = malloc(sizeof(t_state));
+	think->state = THINK;
+	think->time = 0;
+	eat->state = EAT;
+	eat->time = data()->eat_time;
+	sleep->state = SLEEP;
+	sleep->time = data()->sleep_time;
+	think->next = eat;
+	eat->next = sleep;
+	sleep->next = think;
+	return (eat);
 }
 
-void	init_philos(t_data *data, t_philo *philo)
+void	init_forks(void)
 {
 	int	i;
 
 	i = 0;
-	init_forks(data,philo);
-	while (i < data->nbr_philos)
+	data()->forks = (t_fork **)malloc(sizeof(t_fork *) * data()->nbr_philos);
+	if (!data()->forks)
+		msg_error("Error: malloc // alterar");
+	while (i < data()->nbr_philos)
+	{
+		data()->forks[i] = malloc(sizeof(t_fork));
+		data()->forks[i]->using = false;
+		pthread_mutex_init(&data()->forks[i]->rs, NULL);
+		i++;
+	}
+}
+
+void	init_philos(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < data()->nbr_philos)
 	{
 		philo[i].id = i + 1;
 		philo[i].eat_count = 0;
 		philo[i].last_meal = get_timestamp();
-		philo[i].is_eating = false;
-		philo[i].is_sleeping = false;
-		philo[i].is_thinking = true;
-		philo[i].data = data;
-		pthread_mutex_init(&philo[i].lock, NULL);
+		philo[i].state = init_state();
+		philo[i].left_fork = i;
+		philo[i].right_fork = philo[i].id % data()->nbr_philos;
 		i++;
 	}
 }
 
-void	init(int argc, char **argv, t_data *data)
+void	init(int argc, char **argv)
 {
-	data->nbr_philos = ft_atol(argv[1]);
-	data->die_time = ft_atol(argv[2]);
-	data->eat_time = ft_atol(argv[3]);
-	data->sleep_time = ft_atol(argv[4]);
+	data()->nbr_philos = ft_atol(argv[1]);
+	data()->die_time = ft_atol(argv[2]);
+	data()->eat_time = ft_atol(argv[3]);
+	data()->sleep_time = ft_atol(argv[4]);
 	if (argc == 6)
-		data->max_eat_philo = ft_atol(argv[5]);
+		data()->max_eat_philo = ft_atol(argv[5]);
 	else
-		data->max_eat_philo = INT_MAX;
-	data->is_dead = false;
-	pthread_mutex_init(&data->write, NULL);
-	pthread_mutex_init(&data->death, NULL);
+		data()->max_eat_philo = INT_MAX;
+	data()->is_dead = false;
+	init_forks();
+	pthread_mutex_init(&data()->write, NULL);
+	pthread_mutex_init(&data()->death, NULL);
+	pthread_mutex_init(&data()->meal, NULL);
 }

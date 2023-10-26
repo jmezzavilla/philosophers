@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:31:31 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/24 21:54:06 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:49:26 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ size_t	get_timestamp(void)
 	return ((curr_time.tv_sec * 1000) + (curr_time.tv_usec / 1000));
 }
 
-void	waiting_time(size_t time)
+void	waiting_time(t_philo *philo)
 {
-	size_t start;
+	size_t	start;
 
 	start = get_timestamp();
-	while ((get_timestamp() - start) < time)
-		usleep(time / 10);
+	while ((get_timestamp() - start) < (long unsigned int)philo->state->time)
+		usleep(philo->state->time / 10);
 }
 
-time_t	time_diff(t_philo *philo)
+time_t	time_diff(void)
 {
 	time_t	diff;
 
-	diff = get_timestamp() - philo->data->start;
+	diff = get_timestamp() - data()->start;
 	return (diff);
 }

@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/26 23:34:37 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:58:19 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_data
 	int				nbr_philos;
 	bool			is_dead;
 	time_t			start;
-	t_fork			**forks;
+	t_fork			*forks;
 	pthread_mutex_t	write;
 	pthread_mutex_t	death;
 }					t_data;

@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:47:02 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/26 23:35:04 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:53:54 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	clean(t_philo *philo)
 	i = 0;
 	while (i < data()->nbr_philos)
 	{
-		pthread_mutex_destroy(&data()->forks[i]->rs);
+		pthread_mutex_destroy(&data()->forks[i].rs);
 		i++;
 	}
 	pthread_mutex_destroy(&data()->write);

@@ -6,41 +6,41 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/26 23:35:21 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:53:30 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	drop_fork(t_fork *fork, t_philo *philo)
+void	drop_fork(t_fork fork, t_philo *philo)
 {
 	while (!check_death(philo))
 	{
-		pthread_mutex_lock(&fork->rs);
-		if (fork->using)
+		pthread_mutex_lock(&fork.rs);
+		if (fork.using)
 		{
-			fork->using = false;
-			pthread_mutex_unlock(&fork->rs);
+			fork.using = false;
+			pthread_mutex_unlock(&fork.rs);
 			write_msg(philo, DROP_FORK);
 			break ;
 		}
-		pthread_mutex_unlock(&fork->rs);
+		pthread_mutex_unlock(&fork.rs);
 	}
 }
 
-void	take_fork(t_fork *fork, t_philo *philo)
+void	take_fork(t_fork fork, t_philo *philo)
 {
 	while (!check_death(philo))
 	{
-		pthread_mutex_lock(&fork->rs);
-		if (!fork->using)
+		pthread_mutex_lock(&fork.rs);
+		if (!fork.using)
 		{
-			fork->using = true;
-			pthread_mutex_unlock(&fork->rs);
+			fork.using = true;
+			pthread_mutex_unlock(&fork.rs);
 			write_msg(philo, TAKEN_FORK);
 			break ;
 		}
-		pthread_mutex_unlock(&fork->rs);
+		pthread_mutex_unlock(&fork.rs);
 	}
 }
 

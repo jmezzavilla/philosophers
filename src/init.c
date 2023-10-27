@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/26 23:35:08 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:04:48 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_state	*init_state(void)
 	think = malloc(sizeof(t_state));
 	sleep = malloc(sizeof(t_state));
 	eat = malloc(sizeof(t_state));
-	think->state = THINK;
+	think->task = THINK;
 	think->time = 0;
-	eat->state = EAT;
+	eat->task = EAT;
 	eat->time = data()->eat_time;
-	sleep->state = SLEEP;
+	sleep->task = SLEEP;
 	sleep->time = data()->sleep_time;
 	think->next = eat;
 	eat->next = sleep;
@@ -38,14 +38,13 @@ void	init_forks(void)
 	int	i;
 
 	i = 0;
-	data()->forks = (t_fork **)malloc(sizeof(t_fork *) * data()->nbr_philos);
+	data()->forks =  malloc(sizeof(t_fork) * data()->nbr_philos);
 	if (!data()->forks)
 		msg_error("Error: malloc // alterar");
 	while (i < data()->nbr_philos)
 	{
-		data()->forks[i] = malloc(sizeof(t_fork));
-		data()->forks[i]->using = false;
-		pthread_mutex_init(&data()->forks[i]->rs, NULL);
+		data()->forks[i].using = false;
+		pthread_mutex_init(&data()->forks[i].rs, NULL);
 		i++;
 	}
 }
@@ -55,6 +54,7 @@ void	init_philos(t_philo *philo)
 	int	i;
 
 	i = 0;
+
 	while (i < data()->nbr_philos)
 	{
 		philo[i].id = i + 1;
@@ -81,5 +81,4 @@ void	init(int argc, char **argv)
 	init_forks();
 	pthread_mutex_init(&data()->write, NULL);
 	pthread_mutex_init(&data()->death, NULL);
-	pthread_mutex_init(&data()->meal, NULL);
 }

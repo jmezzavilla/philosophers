@@ -6,7 +6,7 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/26 23:36:21 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/27 22:25:34 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,15 +38,16 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@printf "$(PROJECT) $(GREEN)compiled$(RESET)!\n"
+	@make -s clean
 
 clean :
 	$(RM) $(OBJ)
-	@for file in $(OBJ); do \
-        echo "$(PROJECT) deleting $(YELLOW) $$file $(RESET)!"; \
-    done
 	
 fclean : clean
 	$(RM) $(NAME)
+	@for file in $(OBJ); do \
+        echo "$(PROJECT) deleting $(YELLOW) $$file $(RESET)!"; \
+    done
 	@printf "$(PROJECT) $(YELLOW) deleting $(NAME) $(RESET)!\n"
 
 norm:

@@ -6,41 +6,41 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/27 19:53:30 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:20:20 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	drop_fork(t_fork fork, t_philo *philo)
+void	drop_fork(t_fork *fork, t_philo *philo)
 {
 	while (!check_death(philo))
 	{
-		pthread_mutex_lock(&fork.rs);
-		if (fork.using)
+		pthread_mutex_lock(&fork->rs);
+		if (fork->using)
 		{
-			fork.using = false;
-			pthread_mutex_unlock(&fork.rs);
+			fork->using = false;
+			pthread_mutex_unlock(&fork->rs);
 			write_msg(philo, DROP_FORK);
 			break ;
 		}
-		pthread_mutex_unlock(&fork.rs);
+		pthread_mutex_unlock(&fork->rs);
 	}
 }
 
-void	take_fork(t_fork fork, t_philo *philo)
+void	take_fork(t_fork *fork, t_philo *philo)
 {
 	while (!check_death(philo))
 	{
-		pthread_mutex_lock(&fork.rs);
-		if (!fork.using)
+		pthread_mutex_lock(&fork->rs);
+		if (!fork->using)
 		{
-			fork.using = true;
-			pthread_mutex_unlock(&fork.rs);
+			fork->using = true;
+			pthread_mutex_unlock(&fork->rs);
 			write_msg(philo, TAKEN_FORK);
 			break ;
 		}
-		pthread_mutex_unlock(&fork.rs);
+		pthread_mutex_unlock(&fork->rs);
 	}
 }
 
@@ -48,21 +48,21 @@ void	philo_eat(t_philo *philo)
 {
 	if (philo->id % 2)
 	{
-		take_fork(data()->forks[philo->left_fork], philo);
-		take_fork(data()->forks[philo->right_fork], philo);
+		take_fork(&data()->forks[philo->left_fork], philo);
+		take_fork(&data()->forks[philo->right_fork], philo);
 	}
 	else
 	{
-		take_fork(data()->forks[philo->right_fork], philo);
-		take_fork(data()->forks[philo->left_fork], philo);
+		take_fork(&data()->forks[philo->right_fork], philo);
+		take_fork(&data()->forks[philo->left_fork], philo);
 	}
 	if (check_death(philo))
 		return ;
 	philo->last_meal = get_timestamp();
 	philo->eat_count++;
 	write_msg(philo, philo->state->task);
-	drop_fork(data()->forks[philo->right_fork], philo);
-	drop_fork(data()->forks[philo->left_fork], philo);
+	drop_fork(&data()->forks[philo->right_fork], philo);
+	drop_fork(&data()->forks[philo->left_fork], philo);
 }
 
 void	philo_life(t_philo *philo)

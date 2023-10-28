@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:40:54 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/27 20:04:41 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:08:46 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	validate_args(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		msg_error("Error: Wrong number of arguments!");
 	if (!ft_argv_isnumber(argv))
-		msg_error("Error: not valid number");
+		msg_error("Error: Invalid arguments!");
 }
 
 int	main(int argc, char **argv)

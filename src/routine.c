@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 17:49:21 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:00:49 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	drop_fork(t_fork *fork, t_philo *philo)
 		if (fork->using)
 		{
 			fork->using = false;
-			pthread_mutex_unlock(&fork->rs);sudo apt-get install ruby ruby-bundler ruby-dev build-essential
-git clone https://github.com/42Paris/norminette.git ~/.norminette/
-cd ~/.norminette/
-bundle
+			pthread_mutex_unlock(&fork->rs);
 			break ;
 		}
 		pthread_mutex_unlock(&fork->rs);

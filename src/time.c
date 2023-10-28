@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:31:31 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 17:39:50 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:02:20 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	waiting_time(t_philo *philo)
 	start = get_timestamp();
 	while ((get_timestamp() - start) < (long unsigned int)philo->state->time
 		&& !check_death(philo))
-		usleep(philo->state->time / 10);
+		usleep(10);
 }
 
 time_t	time_diff(void)

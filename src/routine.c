@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 18:14:45 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:04:10 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,13 @@ void	philo_eat(t_philo *philo)
 
 void	philo_life(t_philo *philo)
 {
-	if (!check_death(philo))
-	{
-		if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
-			philo_eat(philo);
-		else if (ft_strcmp(philo->state->task, SLEEP) && !check_death(philo))
-			write_msg(philo, philo->state->task);
-		else if (ft_strcmp(philo->state->task, THINK) && !check_death(philo))
-			write_msg(philo, philo->state->task);
-		philo->state = philo->state->next;
-	}
+	if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
+		philo_eat(philo);
+	else if (ft_strcmp(philo->state->task, SLEEP) && !check_death(philo))
+		write_msg(philo, philo->state->task);
+	else if (ft_strcmp(philo->state->task, THINK) && !check_death(philo))
+		write_msg(philo, philo->state->task);
+	philo->state = philo->state->next;
 }
 
 void	*routine(void *arg)

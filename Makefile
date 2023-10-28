@@ -6,7 +6,7 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/27 22:25:34 by jealves-         ###   ########.fr        #
+#    Updated: 2023/10/28 17:45:11 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ PROJECT = <$(GREEN)$(NAME)$(RESET)>
 			
 INCLUDES = include
 
-CFLAGS = -g -pthread -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=thread
+CFLAGS = -g -lpthread -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=thread
 RM= @rm -rf
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
@@ -45,9 +45,6 @@ clean :
 	
 fclean : clean
 	$(RM) $(NAME)
-	@for file in $(OBJ); do \
-        echo "$(PROJECT) deleting $(YELLOW) $$file $(RESET)!"; \
-    done
 	@printf "$(PROJECT) $(YELLOW) deleting $(NAME) $(RESET)!\n"
 
 norm:

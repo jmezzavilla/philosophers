@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/27 19:58:19 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:44:21 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define THINK "is Thinking"
-# define SLEEP "is Sleeping"
-# define EAT "is Eating"
-# define DIED "Died"
-# define DROP_FORK "has drop fork"
+# define THINK "is thinking"
+# define SLEEP "is sleeping"
+# define EAT "is eating"
+# define DIED "died"
 # define TAKEN_FORK "has taken fork"
 
 typedef struct s_fork

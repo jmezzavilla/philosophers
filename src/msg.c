@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:16:30 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/27 20:04:35 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:44:01 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ bool	check_death(t_philo *philo)
 		if (data()->is_dead)
 			return (data()->is_dead);
 		data()->is_dead = true;
-		philo->state->task = DIED;
 		write_msg(philo, DIED);
 		pthread_mutex_unlock(&data()->death);
 		return (true);

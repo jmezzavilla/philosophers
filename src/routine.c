@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/27 20:20:20 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:49:21 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	drop_fork(t_fork *fork, t_philo *philo)
 		if (fork->using)
 		{
 			fork->using = false;
-			pthread_mutex_unlock(&fork->rs);
-			write_msg(philo, DROP_FORK);
+			pthread_mutex_unlock(&fork->rs);sudo apt-get install ruby ruby-bundler ruby-dev build-essential
+git clone https://github.com/42Paris/norminette.git ~/.norminette/
+cd ~/.norminette/
+bundle
 			break ;
 		}
 		pthread_mutex_unlock(&fork->rs);
@@ -59,7 +61,7 @@ void	philo_eat(t_philo *philo)
 	if (check_death(philo))
 		return ;
 	philo->last_meal = get_timestamp();
-	philo->eat_count++;
+	philo->eat_count--;
 	write_msg(philo, philo->state->task);
 	drop_fork(&data()->forks[philo->right_fork], philo);
 	drop_fork(&data()->forks[philo->left_fork], philo);
@@ -67,13 +69,15 @@ void	philo_eat(t_philo *philo)
 
 void	philo_life(t_philo *philo)
 {
-	if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
-		philo_eat(philo);
-	else if (ft_strcmp(philo->state->task, SLEEP) && !check_death(philo))
-		write_msg(philo, philo->state->task);
-	else if (ft_strcmp(philo->state->task, THINK) && !check_death(philo))
-		write_msg(philo, philo->state->task);
-	philo->state = philo->state->next;
+	if(!check_death(philo)){
+		if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
+			philo_eat(philo);
+		else if (ft_strcmp(philo->state->task, SLEEP) && !check_death(philo))
+			write_msg(philo, philo->state->task);
+		else if (ft_strcmp(philo->state->task, THINK) && !check_death(philo))
+			write_msg(philo, philo->state->task);
+		philo->state = philo->state->next;
+	}
 }
 
 void	*routine(void *arg)
@@ -81,15 +85,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (philo->eat_count < data()->max_eat_philo && !check_death(philo))
+	while (philo->eat_count && !check_death(philo))
 	{
-		pthread_mutex_lock(&data()->death);
-		if (data()->is_dead)
-		{
-			pthread_mutex_unlock(&data()->death);
-			break ;
-		}
-		pthread_mutex_unlock(&data()->death);
 		philo_life(philo);
 	}
 	clean_states_philo(philo);

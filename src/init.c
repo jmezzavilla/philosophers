@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 18:09:19 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:14:40 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_forks(void)
 	int	i;
 
 	i = 0;
-	data()->forks =  malloc(sizeof(t_fork) * data()->nbr_philos);
+	data()->forks = malloc(sizeof(t_fork) * data()->nbr_philos);
 	if (!data()->forks)
 		msg_error("Error: malloc!");
 	while (i < data()->nbr_philos)
@@ -54,7 +54,6 @@ void	init_philos(t_philo *philo)
 	int	i;
 
 	i = 0;
-
 	while (i < data()->nbr_philos)
 	{
 		philo[i].id = i + 1;

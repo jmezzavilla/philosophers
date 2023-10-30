@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 19:04:10 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:50:40 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	while (philo->eat_count && !check_death(philo))
-	{
 		philo_life(philo);
-	}
 	clean_states_philo(philo);
 	return (NULL);
 }

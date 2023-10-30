@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 17:44:21 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:34:24 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_philo
 	time_t			last_meal;
 	int				left_fork;
 	int				right_fork;
-	t_data			*data;
 }					t_philo;
 
 t_data				*data(void);

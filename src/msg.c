@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:16:30 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 17:44:01 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:36:17 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ bool	check_death(t_philo *philo)
 	if ((get_timestamp()
 			- philo->last_meal) > (long unsigned int)data()->die_time)
 	{
-		if (data()->is_dead)
-			return (data()->is_dead);
 		data()->is_dead = true;
 		write_msg(philo, DIED);
 		pthread_mutex_unlock(&data()->death);

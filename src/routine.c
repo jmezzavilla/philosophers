@@ -6,25 +6,17 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 16:54:50 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:37:28 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	drop_fork(t_fork *fork, t_philo *philo)
+void	drop_fork(t_fork *fork)
 {
-	while (!check_death(philo))
-	{
-		pthread_mutex_lock(&fork->rs);
-		if (fork->using)
-		{
-			fork->using = false;
-			pthread_mutex_unlock(&fork->rs);
-			break ;
-		}
-		pthread_mutex_unlock(&fork->rs);
-	}
+	pthread_mutex_lock(&fork->rs);
+	fork->using = false;
+	pthread_mutex_unlock(&fork->rs);
 }
 
 void	take_fork(t_fork *fork, t_philo *philo)
@@ -60,8 +52,8 @@ void	philo_eat(t_philo *philo)
 	philo->last_meal = get_timestamp();
 	philo->eat_count--;
 	write_msg(philo, philo->state->task);
-	drop_fork(&data()->forks[philo->right_fork], philo);
-	drop_fork(&data()->forks[philo->left_fork], philo);
+	drop_fork(&data()->forks[philo->right_fork]);
+	drop_fork(&data()->forks[philo->left_fork]);
 }
 
 void	*philo_life(void *arg)

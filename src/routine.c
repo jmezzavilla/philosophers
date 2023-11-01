@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/30 12:50:40 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:47:40 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ void	philo_life(t_philo *philo)
 {
 	if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
 		philo_eat(philo);
-	else if (ft_strcmp(philo->state->task, SLEEP) && !check_death(philo))
-		write_msg(philo, philo->state->task);
-	else if (ft_strcmp(philo->state->task, THINK) && !check_death(philo))
+	else if (!check_death(philo))
 		write_msg(philo, philo->state->task);
 	philo->state = philo->state->next;
 }

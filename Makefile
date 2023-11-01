@@ -6,15 +6,13 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/10/28 17:45:11 by jealves-         ###   ########.fr        #
+#    Updated: 2023/11/01 16:59:40 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 SRC =	src/util.c\
  		src/init.c\
-		src/msg.c\
-		src/threads.c\
 		src/time.c\
 		src/routine.c\
 		src/philo.c\

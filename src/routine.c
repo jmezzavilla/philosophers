@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 15:47:40 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:54:50 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,19 @@ void	philo_eat(t_philo *philo)
 	drop_fork(&data()->forks[philo->left_fork], philo);
 }
 
-void	philo_life(t_philo *philo)
-{
-	if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
-		philo_eat(philo);
-	else if (!check_death(philo))
-		write_msg(philo, philo->state->task);
-	philo->state = philo->state->next;
-}
-
-void	*routine(void *arg)
+void	*philo_life(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	while (philo->eat_count && !check_death(philo))
-		philo_life(philo);
+	{
+		if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
+			philo_eat(philo);
+		else if (!check_death(philo))
+			write_msg(philo, philo->state->task);
+		philo->state = philo->state->next;
+	}
 	clean_states_philo(philo);
 	return (NULL);
 }

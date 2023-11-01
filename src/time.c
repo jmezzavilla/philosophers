@@ -6,11 +6,31 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:31:31 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 18:02:20 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:58:05 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool	check_death(t_philo *philo)
+{
+	pthread_mutex_lock(&data()->death);
+	if (data()->is_dead)
+	{
+		pthread_mutex_unlock(&data()->death);
+		return (true);
+	}
+	if ((get_timestamp()
+			- philo->last_meal) > (long unsigned int)data()->die_time)
+	{
+		data()->is_dead = true;
+		write_msg(philo, DIED);
+		pthread_mutex_unlock(&data()->death);
+		return (true);
+	}
+	pthread_mutex_unlock(&data()->death);
+	return (false);
+}
 
 size_t	get_timestamp(void)
 {

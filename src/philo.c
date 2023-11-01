@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:40:54 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/28 18:08:46 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:34:45 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	validate_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_philo	*philos;
-
 	validate_args(argc, argv);
 	init(argc, argv);
-	philos = malloc(sizeof(t_philo) * data()->nbr_philos);
-	init_philos(philos);
-	create_threads(philos);
 }

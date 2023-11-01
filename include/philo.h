@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/30 17:34:24 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:54:41 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ void				msg_error(char *str);
 void				write_msg(t_philo *philo, char *msg);
 
 void				init(int argc, char **argv);
-void				init_philos(t_philo *philo);
 
-void				*routine(void *arg);
-void				create_threads(t_philo *philo);
+void				*philo_life(void *arg);
 
 size_t				get_timestamp(void);
 time_t				time_diff(void);

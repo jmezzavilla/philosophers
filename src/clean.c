@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:47:02 by jealves-          #+#    #+#             */
-/*   Updated: 2023/10/27 19:53:54 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:59:18 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,19 @@ void	clean(t_philo *philo)
 	pthread_mutex_destroy(&data()->death);
 	free(data()->forks);
 	free(philo);
+}
+
+void	msg_error(char *str)
+{
+	printf("%s\n", str);
+	exit(EXIT_FAILURE);
+}
+
+void	write_msg(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&data()->write);
+	printf("%lu %ld %s\n", time_diff(), philo->id, msg);
+	pthread_mutex_unlock(&data()->write);
+	if (ft_strcmp(philo->state->task, msg))
+		waiting_time(philo);
 }

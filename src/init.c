@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 18:50:35 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:32:25 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	create_threads(t_philo *philo)
 	int	i;
 
 	i = 0;
-	data()->start = get_timestamp();
-	while (i < data()->nbr_philos)
+	program()->start = get_timestamp();
+	while (i < program()->nbr_philos)
 	{
 		if (pthread_create(&philo[i].thread, NULL, &philo_life, &philo[i]))
 			msg_error("Error: pthread_create!");
 		i++;
 	}
 	i = 0;
-	while (i < data()->nbr_philos)
+	while (i < program()->nbr_philos)
 	{
 		if (pthread_join(philo[i].thread, NULL))
 			msg_error("Error: pthread_join!");
@@ -47,8 +47,8 @@ t_state	*init_state(void)
 	eat->task = EAT;
 	sleep->task = SLEEP;
 	think->time = 0;
-	eat->time = data()->eat_time;
-	sleep->time = data()->sleep_time;
+	eat->time = program()->eat_time;
+	sleep->time = program()->sleep_time;
 	think->next = eat;
 	eat->next = sleep;
 	sleep->next = think;
@@ -61,14 +61,14 @@ void	init_philos(void)
 	int		i;
 
 	i = 0;
-	philo = malloc(sizeof(t_philo) * data()->nbr_philos);
-	while (i < data()->nbr_philos)
+	philo = malloc(sizeof(t_philo) * program()->nbr_philos);
+	while (i < program()->nbr_philos)
 	{
 		philo[i].id = i + 1;
-		philo[i].eat_count = data()->max_eat_philo;
-		philo[i].last_meal = 0;
+		philo[i].eat_count = program()->max_eat_philo;
+		philo[i].last_meal = get_timestamp();
 		philo[i].left_fork = i;
-		philo[i].right_fork = philo[i].id % data()->nbr_philos;
+		philo[i].right_fork = philo[i].id % program()->nbr_philos;
 		philo[i].state = init_state();
 		i++;
 	}
@@ -80,30 +80,30 @@ void	init_forks(void)
 	int	i;
 
 	i = 0;
-	data()->forks = malloc(sizeof(t_fork) * data()->nbr_philos);
-	if (!data()->forks)
+	program()->forks = malloc(sizeof(t_fork) * program()->nbr_philos);
+	if (!program()->forks)
 		msg_error("Error: malloc!");
-	while (i < data()->nbr_philos)
+	while (i < program()->nbr_philos)
 	{
-		data()->forks[i].using = false;
-		pthread_mutex_init(&data()->forks[i].rs, NULL);
+		program()->forks[i].using = false;
+		pthread_mutex_init(&program()->forks[i].rs, NULL);
 		i++;
 	}
 }
 
 void	init(int argc, char **argv)
 {
-	data()->nbr_philos = ft_atol(argv[1]);
-	data()->die_time = ft_atol(argv[2]);
-	data()->eat_time = ft_atol(argv[3]);
-	data()->sleep_time = ft_atol(argv[4]);
+	program()->nbr_philos = ft_atol(argv[1]);
+	program()->die_time = ft_atol(argv[2]);
+	program()->eat_time = ft_atol(argv[3]);
+	program()->sleep_time = ft_atol(argv[4]);
 	if (argc == 6)
-		data()->max_eat_philo = ft_atol(argv[5]);
+		program()->max_eat_philo = ft_atol(argv[5]);
 	else
-		data()->max_eat_philo = INT_MAX;
-	data()->is_dead = false;
-	pthread_mutex_init(&data()->write, NULL);
-	pthread_mutex_init(&data()->death, NULL);
+		program()->max_eat_philo = INT_MAX;
+	program()->is_dead = false;
+	pthread_mutex_init(&program()->write, NULL);
+	pthread_mutex_init(&program()->death, NULL);
 	init_forks();
 	init_philos();
 }

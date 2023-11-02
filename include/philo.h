@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 16:54:41 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:48:35 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_philo
 	int				right_fork;
 }					t_philo;
 
-t_data				*data(void);
+t_data				*program(void);
 long				ft_atol(char *nptr);
 bool				ft_isdigit(int c);
 bool				ft_isnumber(char *str);

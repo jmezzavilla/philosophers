@@ -6,13 +6,13 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:40:54 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 16:34:45 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:48:12 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_data	*data(void)
+t_data	*program(void)
 {
 	static t_data	data;
 

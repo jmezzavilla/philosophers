@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 18:37:28 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:34:23 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,52 @@ void	take_fork(t_fork *fork, t_philo *philo)
 		pthread_mutex_unlock(&fork->rs);
 	}
 }
+/*int	take_fork_new(t_philo *philo)
+{
+	t_fork	*fork;
+	int		i;
 
+	i = 0;
+	while (!check_death(philo))
+	{
+		fork = &program()->forks[i];
+		pthread_mutex_lock(&fork->rs);
+		if (!fork->using)
+		{
+			fork->using = true;
+			pthread_mutex_unlock(&fork->rs);
+			write_msg(philo, TAKEN_FORK);
+			return(i);
+		}
+		pthread_mutex_unlock(&fork->rs);
+		if(program()->nbr_philos - 1 > i)
+			i++;
+		else
+			i = 0;
+	}
+	return(-1);
+}*/
 void	philo_eat(t_philo *philo)
 {
 	if (philo->id % 2)
 	{
-		take_fork(&data()->forks[philo->left_fork], philo);
-		take_fork(&data()->forks[philo->right_fork], philo);
+		take_fork(&program()->forks[philo->left_fork], philo);
+		take_fork(&program()->forks[philo->right_fork], philo);
 	}
 	else
 	{
-		take_fork(&data()->forks[philo->right_fork], philo);
-		take_fork(&data()->forks[philo->left_fork], philo);
+		take_fork(&program()->forks[philo->right_fork], philo);
+		take_fork(&program()->forks[philo->left_fork], philo);
 	}
+	//philo->right_fork = take_fork_new(philo);
+	//philo->left_fork = take_fork_new(philo);
 	if (check_death(philo))
 		return ;
 	philo->last_meal = get_timestamp();
 	philo->eat_count--;
 	write_msg(philo, philo->state->task);
-	drop_fork(&data()->forks[philo->right_fork]);
-	drop_fork(&data()->forks[philo->left_fork]);
+	drop_fork(&program()->forks[philo->right_fork]);
+	drop_fork(&program()->forks[philo->left_fork]);
 }
 
 void	*philo_life(void *arg)

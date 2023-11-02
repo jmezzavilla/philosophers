@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:31:31 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 16:58:05 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:47:50 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 bool	check_death(t_philo *philo)
 {
-	pthread_mutex_lock(&data()->death);
-	if (data()->is_dead)
+	pthread_mutex_lock(&program()->death);
+	if (program()->is_dead)
 	{
-		pthread_mutex_unlock(&data()->death);
+		pthread_mutex_unlock(&program()->death);
 		return (true);
 	}
 	if ((get_timestamp()
-			- philo->last_meal) > (long unsigned int)data()->die_time)
+			- philo->last_meal) > (long unsigned int)program()->die_time)
 	{
-		data()->is_dead = true;
+		program()->is_dead = true;
 		write_msg(philo, DIED);
-		pthread_mutex_unlock(&data()->death);
+		pthread_mutex_unlock(&program()->death);
 		return (true);
 	}
-	pthread_mutex_unlock(&data()->death);
+	pthread_mutex_unlock(&program()->death);
 	return (false);
 }
 
@@ -55,6 +55,6 @@ time_t	time_diff(void)
 {
 	time_t	diff;
 
-	diff = get_timestamp() - data()->start;
+	diff = get_timestamp() - program()->start;
 	return (diff);
 }

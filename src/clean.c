@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:47:02 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/01 16:59:18 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:36:51 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	clean_states_philo(t_philo *philo)
 {
-	int		j;
+	int		i;
 	t_state	*cur;
 
-	j = 0;
-	while (j < 3)
+	i = 0;
+	while (i < 3)
 	{
 		cur = philo->state->next;
 		free(philo->state);
 		philo->state = cur;
-		j++;
+		i++;
 	}
 }
 

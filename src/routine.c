@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 21:29:59 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/17 22:10:33 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:32:28 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	philo_eat(t_philo *philo)
 		take_fork(&program()->forks[philo->right_fork], philo);
 		take_fork(&program()->forks[philo->left_fork], philo);
 	}
-	if (check_death(philo))
-		return ;
 	philo->last_meal = get_timestamp();
 	philo->eat_count++;
 	write_msg(philo, philo->state->task);
@@ -61,7 +59,7 @@ void	*philo_life(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while ((philo->eat_count != program()->max_eat_philo ) && !check_death(philo))
+	while ((philo->eat_count != program()->max_eat_philo) && !check_death(philo))
 	{
 		if (ft_strcmp(philo->state->task, EAT) && !check_death(philo))
 			philo_eat(philo);

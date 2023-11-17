@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/17 22:11:08 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:47:04 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	init_philos(void)
 
 	i = 0;
 	philo = malloc(sizeof(t_philo) * program()->nbr_philos);
+	if(!philo)
+		msg_error("Error: malloc!");
 	while (i < program()->nbr_philos)
 	{
 		philo[i].id = i + 1;
@@ -95,7 +97,7 @@ void	init(int argc, char **argv)
 {
 	program()->nbr_philos = ft_atol(argv[1]);
 	if (program()->nbr_philos == 1)
-		program()->die_time = 1;
+		program()->die_time = 10;
 	else
 		program()->die_time = ft_atol(argv[2]);
 	program()->eat_time = ft_atol(argv[3]);

@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/17 21:52:03 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:11:08 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_philos(void)
 	while (i < program()->nbr_philos)
 	{
 		philo[i].id = i + 1;
-		philo[i].eat_count = program()->max_eat_philo;
+		philo[i].eat_count = 0;
 		philo[i].last_meal = get_timestamp();
 		philo[i].left_fork = i;
 		philo[i].right_fork = philo[i].id % program()->nbr_philos;
@@ -103,7 +103,7 @@ void	init(int argc, char **argv)
 	if (argc == 6)
 		program()->max_eat_philo = ft_atol(argv[5]);
 	else
-		program()->max_eat_philo = INT_MAX;
+		program()->max_eat_philo = -1;
 	program()->is_dead = false;
 	pthread_mutex_init(&program()->write, NULL);
 	pthread_mutex_init(&program()->death, NULL);

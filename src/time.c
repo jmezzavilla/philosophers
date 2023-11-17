@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:31:31 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/02 19:47:50 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:51:51 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ bool	check_death(t_philo *philo)
 			- philo->last_meal) > (long unsigned int)program()->die_time)
 	{
 		program()->is_dead = true;
-		write_msg(philo, DIED);
+		pthread_mutex_lock(&program()->write_death);
+		printf("%lu %ld %s\n", time_diff(), philo->id, DIED);
+		pthread_mutex_unlock(&program()->write_death);
 		pthread_mutex_unlock(&program()->death);
 		return (true);
 	}

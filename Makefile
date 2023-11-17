@@ -6,7 +6,7 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/11/03 20:02:53 by jealves-         ###   ########.fr        #
+#    Updated: 2023/11/17 21:56:39 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ PROJECT = <$(GREEN)$(NAME)$(RESET)>
 			
 INCLUDES = include
 
-CFLAGS = -g -pthread -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=thread
+CFLAGS = -g -pthread -Wall -I $(INCLUDES) -Wextra -Werror -fsanitize=thread
 RM= @rm -rf
 
 OBJ = $(patsubst %.c,%.o,$(SRC))

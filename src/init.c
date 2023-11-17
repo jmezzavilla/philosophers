@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:22 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/03 20:09:59 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:52:03 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ void	init_forks(void)
 void	init(int argc, char **argv)
 {
 	program()->nbr_philos = ft_atol(argv[1]);
-	program()->die_time = ft_atol(argv[2]);
+	if (program()->nbr_philos == 1)
+		program()->die_time = 1;
+	else
+		program()->die_time = ft_atol(argv[2]);
 	program()->eat_time = ft_atol(argv[3]);
 	program()->sleep_time = ft_atol(argv[4]);
 	if (argc == 6)
@@ -104,6 +107,7 @@ void	init(int argc, char **argv)
 	program()->is_dead = false;
 	pthread_mutex_init(&program()->write, NULL);
 	pthread_mutex_init(&program()->death, NULL);
+	pthread_mutex_init(&program()->write_death, NULL);
 	init_forks();
 	init_philos();
 }

@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:15:37 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/02 19:48:35 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:56:23 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	t_fork			*forks;
 	pthread_mutex_t	write;
 	pthread_mutex_t	death;
+	pthread_mutex_t	write_death;
 }					t_data;
 
 typedef struct s_state

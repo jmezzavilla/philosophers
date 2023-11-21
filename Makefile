@@ -6,7 +6,7 @@
 #    By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 22:40:23 by jealves-          #+#    #+#              #
-#    Updated: 2023/11/17 22:55:32 by jealves-         ###   ########.fr        #
+#    Updated: 2023/11/21 22:15:29 by jealves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC =	src/util.c\
 PROJECT = <$(GREEN)$(NAME)$(RESET)>
 			
 INCLUDES = include
+CC = cc
 
 CFLAGS = -g -pthread -Wall -I $(INCLUDES) -Wextra -Werror #-fsanitize=thread
 RM= @rm -rf
@@ -36,10 +37,12 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@printf "$(PROJECT) $(GREEN)compiled$(RESET)!\n"
-	@make -s clean
 
 clean :
 	$(RM) $(OBJ)
+	@for file in $(OBJ); do \
+        echo "$(PROJECT) deleting $(YELLOW) $$file $(RESET)!"; \
+    done
 	
 fclean : clean
 	$(RM) $(NAME)
@@ -50,7 +53,7 @@ norm:
 		
 re : fclean all
 
-.PHONY : all clean fclean bonus re
+.PHONY : all clean fclean re
 
 ### COLORS ###
 

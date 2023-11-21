@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:40:54 by jealves-          #+#    #+#             */
-/*   Updated: 2023/11/02 19:48:12 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/11/21 21:40:35 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,24 @@ bool	ft_argv_isnumber(char **argv)
 	return (true);
 }
 
-void	validate_args(int argc, char **argv)
+bool	validate_args(int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
+	{
 		msg_error("Error: Wrong number of arguments!");
+		return (false);
+	}
 	if (!ft_argv_isnumber(argv))
+	{
 		msg_error("Error: Invalid arguments!");
+		return (false);
+	}
+	return (true);
 }
 
 int	main(int argc, char **argv)
 {
-	validate_args(argc, argv);
+	if(!validate_args(argc, argv))
+		return (1);
 	init(argc, argv);
 }
